@@ -100,7 +100,9 @@ def modal2():
 @app.route('/movies.html/sort', methods=['POST'])
 def movie_sort():
     sort = request.form['sort']
-
+    login_id=request.cookies.get('id')
+    login_nickname=request.cookies.get('nickname')
+    login_num=request.cookies.get('num')
     db_all_rating = pymysql.connect(host='localhost', user='root',
             password='1234', database='myweb3',
             autocommit=True, cursorclass=pymysql.cursors.DictCursor)
@@ -125,8 +127,8 @@ def movie_sort():
        movies = db_cursor.fetchall()
        db_cursor.execute("select img.poster_image from rating rt join image img on rt.id=img.id where rt.movie_or_drama='movie'order by rating desc;")
        movie_poster_img = db_cursor.fetchall()
-    return redirect(url_for('movies',all=all_rating,movies=movies,movie_poster_img=movie_poster_img))
-    #return render_template('movies.html', all=all_rating,movies=movies,movie_poster_img=movie_poster_img,login_id=login_id,login_nickname=login_nickname,login_num=login_num,)
+    
+    return render_template('movies.html', all=all_rating,movies=movies,movie_poster_img=movie_poster_img,login_id=login_id,login_nickname=login_nickname,login_num=login_num,)
 
 @app.route('/tvshows.html')
 def tvshows():
@@ -180,6 +182,9 @@ def modal_tvshow():
 def drama_sort():
     sort = request.form['sort']
     print(sort)
+    login_id=request.cookies.get('id')
+    login_nickname=request.cookies.get('nickname')
+    login_num=request.cookies.get('num')
     db_all_rating = pymysql.connect(host='localhost', user='root',
             password='1234', database='myweb3',
             autocommit=True, cursorclass=pymysql.cursors.DictCursor)
@@ -205,8 +210,8 @@ def drama_sort():
        db_cursor.execute("select img.poster_image from rating rt join image img on rt.id=img.id where rt.movie_or_drama='drama'order by rating desc;")
        drama_poster_img = db_cursor.fetchall()
     
-    return redirect(url_for('tvshows',all=all_rating, dramas=dramas, drama_poster_img=drama_poster_img))
-    #return render_template('tvshows.html', all=all_rating, dramas=dramas, drama_poster_img=drama_poster_img,login_id=login_id,login_nickname=login_nickname,login_num=login_num,)
+    #return redirect(url_for('tvshows',all=all_rating, dramas=dramas, drama_poster_img=drama_poster_img))
+    return render_template('tvshows.html', all=all_rating, dramas=dramas, drama_poster_img=drama_poster_img,login_id=login_id,login_nickname=login_nickname,login_num=login_num,)
 
 @app.route('/videos.html')
 def videos():
@@ -252,7 +257,9 @@ def modal_videos():
 @app.route('/videos.html/sort', methods=['POST'])
 def video_sort():
     sort = request.form['sort']
-
+    login_id=request.cookies.get('id')
+    login_nickname=request.cookies.get('nickname')
+    login_num=request.cookies.get('num')
     db_all_rating = pymysql.connect(host='localhost', user='root',
             password='1234', database='myweb3',
             autocommit=True, cursorclass=pymysql.cursors.DictCursor)
@@ -271,8 +278,8 @@ def video_sort():
     else: #평점순으로 정렬
        db_cursor.execute("select * from video vd join rating rt on vd.id=rt.id order by rt.rating desc;")
        videos = db_cursor.fetchall()
-    return redirect(url_for('videos',all=all_rating,videos=videos))
-    #return render_template('videos.html', all=all_rating,videos=videos,login_id=login_id,login_nickname=login_nickname,login_num=login_num,)
+    #return redirect(url_for('videos',all=all_rating,videos=videos))
+    return render_template('videos.html', all=all_rating,videos=videos,login_id=login_id,login_nickname=login_nickname,login_num=login_num,)
 
 @app.route('/login.html')
 def login():
@@ -376,4 +383,4 @@ def write():
     
     return jsonify({'review':review})
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=5001)
+    app.run(host='0.0.0.0',port=5001,debug=True)
