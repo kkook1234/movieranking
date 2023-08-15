@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/login_style.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@300&display=swap" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-box"><div class="nav-logo"><a href="/">Movie Ranking</a></div></div>
+        <form class="login-box" action="/login.html/login" method="POST">
+            <input class="id" type="text" placeholder="ID" name="id"><br>
+            <input class="password" type="password" placeholder="PASSWORD" name="password"><br>
+            <input class="submit" type="submit" value="Login"><br>
+            <a class="signup" href="/signup.html">계정이 없으신가요? </a>
+        </form>
+    </div>
+    <script>
+         if ("{{alert}}"!=""){
+            alert("{{alert}}");
+        }
+    </script>
+</body>
+</html>

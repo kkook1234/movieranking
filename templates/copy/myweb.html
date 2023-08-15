@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Layout</title>
+    <link href="stylesheet.css" rel="stylesheet" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@300&display=swap" rel="stylesheet">
+    
+</head>
+
+<body>
+    <div class="body2">
+        <nav class="nav-container">
+            <div class="nav-logo"><a>Movie Ranking</a></div>
+            <div class="nav-search-block">
+                <input id="nav-search" class="nav-search" type="text" onkeyup="if(window.event.keyCode==13){search()}else{filter()}" placeholder="Search movies,TV">
+                <div class="nav-search-container">
+                    <div class="nav-search-item">Mission: Impossible – Dead Reckoning Part One</div>
+                    <div class="nav-search-item">Sound of Freedom</div>
+                    <div class="nav-search-item">Insidious: The Red Door</div>
+                    <div class="nav-search-item">Indiana Jones and Dial of Destiny</div>
+                    <div class="nav-search-item">Elemental</div>
+                    <div class="nav-search-item">Justified:City Primeval</div>
+                    <div class="nav-search-item">Secret Invasion</div>
+                    <div class="nav-search-item">The Bear</div>
+                    <div class="nav-search-item">Foundation</div>
+                    <div class="nav-search-item">The Crowded Room</div>
+                </div>
+            </div>
+            <div class="nav-menubar"> 
+                <a class="nav-menu" href="nav-menu">MOVIES</a>
+                <a class="nav-menu" href="nav-menu">TVSHOWS</a>
+                <a class="nav-menu" href="nav-menu">VIDEOS</a>
+            </div>
+        </nav>
+
+        <header>
+            <div id="image" class="header-image" style="background-image: url('image/mission2.jpg')">
+                <div class="header-image-information header-text">
+                    <h2 id="header-movie-name">Mission: Impossible – Dead Reckoning Part One</h2>
+                    <h3 class="header-crown">97%</h3>
+                    <iframe class="header-video" src="https://www.youtube.com/embed/HurjfO_TDlQ?autoplay=1&mute=1" frameborder="0" >
+                    </iframe>
+                </div>
+            </div>
+            
+        </header>
+        <main>
+            <div>
+                <h2 class="text-col">상영 영화 인기 순위</h2>
+                <div class="main-rank">
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url('image/mission.jpg')"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">97%</a3>
+                            <br>
+                            <a2 class="main-name">Mission:Impossible-Dead Reckoning</a2></div>
+                    </div>
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url('image/freedom.jpg')"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">74%</a3>
+                            <br>
+                            <a2 class="main-name">Sound of Freedom</a2></div>
+                    </div>
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url('image/reddoor.jpg')"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">37%</a3>
+                            <br>
+                            <a2 class="main-name">Insidious: The Red Door</a2></div>
+                    </div>
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url('image/jones.jpg')"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">69%</a3>
+                            <br>
+                            <a2 class="main-name">Indiana Jones and Dial of Destiny</a2></div>
+                    </div>
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url('image/elemental.jpg')"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">74%</a3>
+                            <br>
+                            <a2 class="main-name">Elemental</a2></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div>
+                <h2 class="text-col">방영 드라마 인기 순위</h2>
+                <div class="main-rank">
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url('image/justified.jpg')"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">93%</a3>
+                            <br>
+                            <a2 class="main-name">Justified:City Primeval</a2></div>
+                    </div>
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url('image/secret.jpg')"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">59%</a3>
+                            <br>
+                            <a2 class="main-name">Secret Invasion</a2></div>
+                    </div>
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url('image/the bear.jpg')"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">99%</a3>
+                            <br>
+                            <a2 class="main-name">The Bear</a2></div>
+                    </div>
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url('image/foundation.jpg')"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">86%</a3>
+                            <br>
+                            <a2 class="main-name">Foundation</a2></div>
+                    </div>
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url('image/crowded.jpg')"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">30%</a3>
+                            <br>
+                            <a2 class="main-name">The Crowded Room</a2></div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </main>
+        <h2 class="text-col">최근 이슈</h2>
+        <aside>
+            <div class="aside-block">
+                <div class="aside-block-col">
+                    <iframe class="aside-block-video" src="https://www.youtube.com/embed/pBk4NYhWNMM" frameborder="0" ></iframe>
+                    <div class="aside-block-name">
+                        <a2>Barbie | Main Trailer</a2>
+                    </div>
+                </div>
+                <div class="aside-block-col"><iframe class="aside-block-video" src="https://www.youtube.com/embed/HurjfO_TDlQ" frameborder="0" ></iframe>
+                    <div class="aside-block-name">
+                        <a2>Mission: Impossible – Dead Reckoning Part One | Final Trailer (2023 Movie) - Tom Cruise</a2>
+                    </div>
+                </div>
+            </div>
+            <div class="aside-block">
+                <div class="aside-block-col">
+                    <iframe class="aside-block-video" src="https://www.youtube.com/embed/UP1M-FDlG34" frameborder="0"></iframe>
+                    <div class="aside-block-name">
+                        <a2>Marvel Studios' SECRET INVASION | EPISODE 6 'Season Finale' PROMO TRAILER </a2>
+                    </div>
+                </div>
+                <div class="aside-block-col"><iframe class="aside-block-video" src="https://www.youtube.com/embed/sOsIKu2VAkM" frameborder="0" ></iframe>
+                    <div class="aside-block-name">
+                        <a2>Oppenheimer | Opening Look</a2>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <footer>
+            <div class="footer-top">
+                <hr class="footer-top-line">
+            </div>
+            <div class="footer-text">
+                <div class="footer-text-a">
+                    <a >1234@naver.com</a>
+                    <br>
+                    <a >010-1111-2222</a>
+                </div>
+               
+                <h2 >Movie Ranking</h2>
+            </div>
+            
+        </footer>
+    </div>
+    <script>
+        const mainimg = document.getElementsByClassName("main-rank-image");
+        const mainname=document.getElementsByClassName("main-name");
+        const maincrown=document.getElementsByClassName("main-crown");
+        const headercrown=document.getElementsByClassName("header-crown");
+        const headername=document.getElementById("header-movie-name");
+        const headerimg = document.getElementById("image");
+        function changeheader(i){//header 변경
+                imgsrc=mainimg[i].style.backgroundImage;
+                imgname=imgsrc.slice(0,imgsrc.length-6)+"2"+imgsrc.slice(imgsrc.length-6,imgsrc.length);
+                headerimg.style.backgroundImage=imgname;
+                headername.innerHTML=mainname[i].innerHTML;
+                headercrown[0].innerHTML=maincrown[i].innerHTML;
+        }
+        for(let i=0;i<mainimg.length;i++){
+            mainimg[i].addEventListener("click", () => {
+                changeheader(i)
+            });
+        }
+
+        function search(){//입력후 엔터 시 해당 영화,방송 찾기
+            const name = document.getElementById('nav-search').value.toUpperCase().replace(/ /g,"");
+            if(name==""){
+                alert("검색어를 입력해주세요.");
+            }
+            else{
+                let notitle=false;
+                for(let i=0;i<mainimg.length;i++){
+                    const img_name=mainname[i].innerHTML.toUpperCase().replace(/ /g,"");
+                    if(img_name==name){
+                        changeheader(i);
+                        notitle=true;
+                        break;
+                    }
+                    
+                }
+                console.log(notitle);
+                if(notitle==false){
+                    alert("해당 제목이 존재하지 않습니다.");
+                }
+                notitle=false;
+            }
+        }
+
+        function filter(){//키보드 입력 시 해당 문자가 들어가는 영화, 방송 필터링
+            const name = document.getElementById('nav-search').value.toUpperCase().replace(/ /g,"");
+            const searchbox=document.getElementsByClassName('nav-search-container');
+            const searchtitle=document.getElementsByClassName('nav-search-item');
+            if(name==""){
+                searchbox[0].style.display="none";
+            }
+            else{
+                searchbox[0].style.display="block";
+                for(let i=0;i<searchtitle.length;i++){
+                    const titlename=searchtitle[i].innerHTML.toUpperCase().replace(/ /g,"");
+                    if(titlename.indexOf(name)>-1){
+                        searchtitle[i].style.display="block";
+                    }
+                    else{
+                        searchtitle[i].style.display="none";
+                    }
+                    
+                }
+            }
+        }
+    </script>
+</body>
+</html>

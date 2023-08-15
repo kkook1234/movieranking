@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link href="/static/index_style.css" rel="stylesheet" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@300&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="searchranking-box">
+        <div class="searchranking-a"><a>사이트 검색 순위</a></div>
+        {% for i in range(searchranking|length)%}
+            <div class="searchranking-a"><a>{{i+1}}. {{searchranking[i]['name']}}</a></div>
+        {% endfor %}
+    </div>
+    <div class="body2">
+        <nav class="nav-container">
+            <div class="nav-logo"><a href="/">Movie Ranking</a></div>
+            <div class="nav-search-block">
+                <input id="nav-search" class="nav-search" type="text" onkeyup="if(window.event.keyCode==13){search()}else if(window.event.keyCode==40){choosedown()}else if(window.event.keyCode==38){chooseup()}else{filter()}" placeholder="Search movies,TV">
+                <div class="nav-search-container">
+                    {% for all in all %}
+                        <div class="nav-search-item">{{ all['name'] }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="nav-menubar"> 
+                <div class="login-box">
+                    {%if login_nickname ==""or login_nickname==none%}
+                    <a class="login-box2" href="/signup.html" >signup</a>
+                    <a class="login-box2" href="/login.html">Log in</a>
+                    {%else%}
+                    <a class="login-box2" href="/login.html">welcome! {{login_nickname}}</a>
+                    <a class="login-box2" onClick="logout()" style="cursor:pointer;" >Log out</a>
+                    {%endif%}
+                </div>
+                <div class="menu-box">
+                    <a class="nav-menu" href="/movies.html" >MOVIES</a>
+                    <a class="nav-menu" href="/tvshows.html">TVSHOWS</a>
+                    <a class="nav-menu" href="/videos.html">VIDEOS</a>
+                </div>
+            </div>
+        </nav>
+
+        <header>
+            <div id="image" class="header-image" style="background-image: url('static/image/mission2.jpg')">
+                <div class="header-image-information header-text">
+                    <h2 id="header-movie-name">{{all[0]['name']}}</h2>
+                    <h3 class="header-crown">{{all[0]['rating']}}%</h3>
+                    <iframe id="header-movie-video" class="header-video" src="https://www.youtube.com/embed/HurjfO_TDlQ?autoplay=1&mute=1&controls=2&showinfo=0&modestbranding=1" frameborder="0" >
+                    </iframe>
+                </div>
+            </div>
+            
+        </header>
+        <main>
+            <div>
+                <h2 class="text-col">상영 영화 인기 순위</h2>
+                <div class="main-rank">
+                    {% for i in range(movies|length) %} 
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url({{movie_poster_img[i].poster_image}})"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">{{movies[i]['rating']}}%</a3>
+                            <br>
+                            <a2 class="main-name">{{movies[i]['name']}}</a2></div>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+            <div>
+                <h2 class="text-col">방영 드라마 인기 순위</h2>
+                <div class="main-rank">
+                    {% for i in range(dramas|length) %} 
+                    <div class="main-rank-movie">
+                        <div class="main-rank-image" style="background-image: url({{drama_poster_img[i].poster_image}})"></div>
+                        <div class="main-rank-name">
+                            <a3 class="main-crown">{{dramas[i]['rating']}}%</a3>
+                            <br>
+                            <a2 class="main-name">{{dramas[i]['name']}}</a2></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+        </main>
+        <h2 class="text-col">최근 이슈</h2>
+        <aside>
+            <div class="aside-block">
+                <div class="aside-block-col">
+                    <iframe class="aside-block-video" src="{{recent_issues[0]['video_link']}}" frameborder="0" ></iframe>
+                    <div class="aside-block-name">
+                        <a2>{{recent_issues[0]['video_title']}}</a2>
+                    </div>
+                </div>
+                <div class="aside-block-col"><iframe class="aside-block-video" src="{{recent_issues[1]['video_link']}}" frameborder="0" ></iframe>
+                    <div class="aside-block-name">
+                        <a2>{{recent_issues[1]['video_title']}}</a2>
+                    </div>
+                </div>
+            </div>
+            <div class="aside-block">
+                <div class="aside-block-col">
+                    <iframe class="aside-block-video" src="{{recent_issues[2]['video_link']}}" frameborder="0"></iframe>
+                    <div class="aside-block-name">
+                        <a2>{{recent_issues[2]['video_title']}} </a2>
+                    </div>
+                </div>
+                <div class="aside-block-col"><iframe class="aside-block-video" src="{{recent_issues[3]['video_link']}}" frameborder="0" ></iframe>
+                    <div class="aside-block-name">
+                        <a2>{{recent_issues[3]['video_title']}}</a2>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <footer>
+            <div class="footer-top">
+                <hr class="footer-top-line">
+            </div>
+            <div class="footer-text">
+                <div class="footer-text-a">
+                    <a >1234@naver.com</a>
+                    <br>
+                    <a >010-1111-2222</a>
+                </div>
+               
+                <h2 >Movie Ranking</h2>
+            </div>
+            
+        </footer>
+    </div>
+    <script>
+        console.log(document.cookie);
+        function logout(){
+            var cookies = document.cookie.split(";");
+
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+            }
+            location.reload();
+            console.log(document.cookie);
+        }    
+        
+        const mainimg = document.getElementsByClassName("main-rank-image");
+        const mainname=document.getElementsByClassName("main-name");
+        const maincrown=document.getElementsByClassName("main-crown");
+        const headercrown=document.getElementsByClassName("header-crown");
+        const headername=document.getElementById("header-movie-name");
+        const headerimg = document.getElementById("image");
+        const headervideo=document.getElementById("header-movie-video");
+        const modal=document.getElementById("modal");
+        const closeModalBtn = document.getElementById("close-modal");
+        const modal_content = document.getElementsByClassName("modal-content");
+        function changeheader(i){//header 변경
+                imgsrc=mainimg[i].style.backgroundImage;
+                imgname=imgsrc.slice(0,imgsrc.length-6)+"2"+imgsrc.slice(imgsrc.length-6,imgsrc.length);
+                headerimg.style.backgroundImage=imgname;
+                headername.innerHTML=mainname[i].innerHTML;
+                headercrown[0].innerHTML=maincrown[i].innerHTML;
+                window.videos = {{ videos | tojson }};
+                const video=window.videos[i]['video_link']+"?autoplay=1&mute=1";
+                headervideo.src=video;
+        }   
+      
+        
+        for(let i=0;i<mainimg.length;i++){
+            mainimg[i].addEventListener("click", () => {
+                changeheader(i)
+                
+            });
+        }
+
+        function submitForm(modaldata){
+
+        $.ajax({
+            type: 'POST',
+            url: '/search', // 실제 서버의 URL로 변경해야 합니다.
+            data: JSON.stringify({data:modaldata}),
+            contentType: 'application/json',
+            success: function(response) {
+                console.log(response);
+                
+            },
+            error: function(xhr, status, error) {
+                // 에러 처리를 수행합니다.
+                console.error(error);
+            }
+        });
+       
+    }
+      
+        function search(){//입력후 엔터 시 해당 영화,방송 찾기
+            const name = document.getElementById('nav-search').value.toUpperCase().replace(/ /g,"");
+            window.all = {{ all | tojson }};
+            if(name==""){
+                alert("검색어를 입력해주세요.");
+            }
+            else{
+                let notitle=false;
+                for(let i=0;i<mainimg.length;i++){
+                    const all1=all[i]['name'];
+                    const img_name=mainname[i].innerHTML.toUpperCase().replace(/ /g,"");
+                    if(img_name==name){
+                        changeheader(i);
+                        submitForm(all1)
+                        searchnone();
+                        notitle=true;
+                        break;
+                    }
+                    
+                }
+                console.log(notitle);
+                if(notitle==false){
+                    alert("해당 제목이 존재하지 않습니다.");
+                }
+                notitle=false;
+            }
+        }
+        var blockcheck=[];
+        function filter(){//키보드 입력 시 해당 문자가 들어가는 영화, 방송 필터링
+            const name = document.getElementById('nav-search').value.toUpperCase().replace(/ /g,"");
+            const searchbox=document.getElementsByClassName('nav-search-container');
+            const searchtitle=document.getElementsByClassName('nav-search-item');
+            if(name==""){
+                searchbox[0].style.display="none";
+                searchnone();
+            }
+            else{
+                searchbox[0].style.display="block";
+                for(let i=0;i<searchtitle.length;i++){
+                    const titlename=searchtitle[i].innerHTML.toUpperCase().replace(/ /g,"");
+                    if(titlename.indexOf(name)>-1){
+                        searchtitle[i].style.display="block";
+
+                        if(blockcheck.indexOf(i)==-1){
+                        blockcheck.push(i);}
+
+                    }
+                    else{
+                        searchtitle[i].style.display="none";
+
+                        if(blockcheck.indexOf(i)!=-1){
+                        blockcheck.splice(blockcheck.indexOf(i),1);}
+                    }                    
+                }
+            }
+           
+            
+        }
+        var downkey=-1;
+        function choosedown(){
+            const name = document.getElementById('nav-search').value;
+            const searchtitle=document.getElementsByClassName('nav-search-item');
+            if(downkey<blockcheck.length){
+                downkey+=1;
+                document.getElementById('nav-search').value=searchtitle[blockcheck[downkey]].innerHTML;
+                
+            }
+            else{
+                downkey=blockcheck.length-1;
+                document.getElementById('nav-search').value=searchtitle[blockcheck[downkey]].innerHTML;
+            }
+            
+        }
+        function chooseup(){
+            
+            const name = document.getElementById('nav-search').value;
+            const searchtitle=document.getElementsByClassName('nav-search-item');
+            if(downkey>0){
+                downkey-=1;    
+                document.getElementById('nav-search').value=searchtitle[blockcheck[downkey]].innerHTML;
+            }
+            else{
+                document.getElementById('nav-search').value=searchtitle[blockcheck[downkey]].innerHTML;
+            }
+            
+        }
+        function searchnone(){
+            document.getElementById('nav-search').value="";
+            downkey=-1;
+            const searchbox=document.getElementsByClassName('nav-search-container');
+            const searchtitle=document.getElementsByClassName('nav-search-item');
+            searchbox[0].style.display="none";
+            for(let i=0;i<searchtitle.length;i++){
+                searchtitle[i].style.none="none";
+            }
+            blockcheck=[];
+        }
+      
+
+        
+    </script>
+</body>
+</html>

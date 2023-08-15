@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>videos</title>
+    <link href="/static/videos_style.css" rel="stylesheet" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@300&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div id="modal">
+        <div class="modal-content" >
+            <!-- <h2>모달창 제목</h2>
+            <p>모달창 내용</p> -->
+            
+            <div class="modal-background" style="background-image: url('/static/image/mission2.jpg')">
+                <div class="modal-blur">
+                    <div>
+                        <span id="close-modal" class="material-symbols-outlined" style="color:gray; font-size:40px; float:right; margin-top:15px;margin-right:15px;">
+                            cancel
+                        </span>
+                    </div>
+                    <div class="modal-imtx">
+                        <div id="modal-img" class="modal-img" style="background-image: url('/static/image/mission.jpg')">
+                            
+                        </div>
+                        <div class="modal-text">
+                            <h2 id="modal-movie-name">mission</h2>
+                            <a4 id="modal-movie-crown">97</a4><a5>%</a5><br>
+                            <br>
+                            <a2>Director: Christopher McQuarrie</a><br>
+                            <a2>Release Date: </a2><a2 id="modal-movie-date">date</a2><br>
+                            <a2>Distributor: Paramount Pictures</a2>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="modal-info">
+                <div class="modal-video">
+                    <a style="margin-left:10px;font-size: 20px;">Trailer</a>
+                    <br>
+                    <a class="modal-trailer" style="margin-left:10px;font-size: 25px;" href="https://www.youtube.com/embed/HurjfO_TDlQ">Mission: Impossible – Dead Reckoning Part One | Final Trailer (2023 Movie) - Tom Cruise</a>
+                </div>
+                <div class="modal-comment">
+                    <a style="margin-left:10px;font-size: 20px;">Review</a>
+                    <br>
+                    <div class="modal-comment-block">
+                        <div class="modal-comment-box">
+                        {%for i in range(5)%}
+                        <div class="review-box"><div class="nickname"><a class="review-nickname" style="font-size: 30px;font-weight: 600;"></a></div ><div class="review"><a class="review-content"style="font-size: 30px;"></a></div></div>
+                        {%endfor%}
+                        </div>
+                    <input type="text" name="write" class="write-review" placeholder="Write a review" onkeydown="if(event.keyCode==13){addreview()}">
+                    </div>
+                   
+
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="body2">
+        <nav class="nav-container">
+            <div class="nav-logo"><a href="/">Movie Ranking</a></div>
+            <div class="nav-search-block">
+                <input id="nav-search" class="nav-search" type="text" onkeyup="if(window.event.keyCode==13){search()}else if(window.event.keyCode==40){choosedown()}else if(window.event.keyCode==38){chooseup()}else{filter()}" placeholder="Search movies,TV">
+                <div class="nav-search-container">
+                    {% for all in all %}
+                        <div class="nav-search-item">{{ all['name'] }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="nav-menubar"> 
+                <div class="login-box">
+                    {%if login_nickname ==""or login_nickname==none%}
+                    <a class="login-box2" href="/signup.html" >signup</a>
+                    <a class="login-box2" href="/login.html">Log in</a>
+                    {%else%}
+                    <a class="login-box2" href="/login.html">welcome! {{login_nickname}}</a>
+                    <a class="login-box2" onClick="logout()" style="cursor:pointer;" >Log out</a>
+                    {%endif%}
+                </div>
+                <div class="menu-box">
+                    <a class="nav-menu" href="/movies.html" >MOVIES</a>
+                    <a class="nav-menu" href="/tvshows.html">TVSHOWS</a>
+                    <a class="nav-menu" href="/videos.html">VIDEOS</a>
+                </div>
+            </div>
+        </nav>
+        <header>
+            <div class="header-text">Videos</div>
+            <div class="header-select">
+                <form id="sortform" action="/videos.html/sort" method="POST">
+                    <select id="sort" name="sort">
+                    <option disabled selected>SORT</option>
+                    <option value="date">NEWEST</option>
+                    <option value="name">A-Z</option>
+                    <option value="ranking">RATING</option>
+                    </select>
+                    
+                </form>
+            </div>
+            <div class="header-line"></div>
+        </header>
+        <aside>
+            {%for i in range(0,(videos|length),2)%}
+            
+            <div class="aside-block">
+                <div class="aside-block-col">
+                    <iframe class="aside-block-video" src="{{videos[i]['video_link']}}?controls=2&showinfo=0&modestbranding=1" frameborder="0" ></iframe>
+                    <div class="aside-block-name">
+                        <a2>{{videos[i]['video_title']}}</a2>
+                    </div>
+                </div>
+                <div class="aside-block-col"><iframe class="aside-block-video" src="{{videos[i+1]['video_link']}}?controls=2&showinfo=0&modestbranding=1" frameborder="0" ></iframe>
+                    <div class="aside-block-name">
+                        <a2>{{videos[i+1]['video_title']}}</a2>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </aside>
+        <footer>
+            <div class="footer-top">
+                <hr class="footer-top-line">
+            </div>
+            <div class="footer-text">
+                <div class="footer-text-a">
+                    <a >1234@naver.com</a>
+                    <br>
+                    <a >010-1111-2222</a>
+                </div>
+               
+                <h2 >Movie Ranking</h2>
+            </div>
+            
+        </footer>
+    </div>
+    <script>
+        console.log(document.cookie);
+        function logout(){
+            var cookies = document.cookie.split(";");
+
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+            }
+            location.reload();
+            console.log(document.cookie);
+        }    
+        
+         document.getElementById("sort").addEventListener("change", function() {
+                document.getElementById("sortform").submit();
+
+            });
+            const modal=document.getElementById("modal");
+        const closeModalBtn = document.getElementById("close-modal");
+        const modal_content = document.getElementsByClassName("modal-content");
+        const mainimg = document.getElementsByClassName("main-rank-image");
+        const mainname=document.getElementsByClassName("main-name");
+        
+        function addreview() {
+          if(document.cookie === ''){
+            alert("로그인 후 작성해주세요.");
+            }
+          else{
+          const review=document.getElementsByClassName("write-review")[0].value;
+          const movie_name=document.getElementById("modal-movie-name").innerHTML 
+          
+          $.ajax({
+                type: 'POST',
+                url: '/write',
+                data: JSON.stringify({ review: review, movie_name: movie_name }),
+                contentType: 'application/json',
+                success: function(response) {
+                    changereview(response.review);
+                    document.getElementsByClassName("write-review")[0].value = '';
+                },
+                error: function(xhr, status, error) {
+                 
+                    console.error(error);
+                }
+            });}
+        }
+        
+        //모달창 열고 닫기
+        $(document).keydown(function(event) {//esc로 모달 닫기
+            if ( event.keyCode == 27 || event.which == 27 ) {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto"; 
+            }
+        }); 
+        closeModalBtn.addEventListener("click", () => {//버튼 클릭으로 모달 닫기
+            modal.style.display = "none";
+            document.body.style.overflow = "auto"; 
+        });
+        for(let i=0;i<mainimg.length;i++){
+            mainimg[i].addEventListener("click", () => {
+                const modaldata=mainname[i].innerHTML
+                submitForm(modaldata);
+                modal.style.display="block";
+                document.body.style.overflow = "hidden";//스크롤 제거
+                
+            });
+        }
+        function submitForm(modaldata){
+            
+                $.ajax({
+                type: 'POST',
+                url: '/videos.html/modal', // 실제 서버의 URL로 변경해야 합니다.
+                data: JSON.stringify({data:modaldata}),
+                contentType: 'application/json',
+                success: function(response) {
+                    changemodal(response.all_rating);
+                    changereview(response.review);
+                },
+                error: function(xhr, status, error) {
+                    // 에러 처리를 수행합니다.
+                    console.error(error);
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: '/search', // 실제 서버의 URL로 변경해야 합니다.
+                data: JSON.stringify({data:modaldata}),
+                contentType: 'application/json',
+                success: function(response) {
+                    
+
+                },
+                error: function(xhr, status, error) {
+                    // 에러 처리를 수행합니다.
+                    console.error(error);
+                }
+            });
+           
+        }
+        function changereview(response){
+            review_nickname=document.getElementsByClassName("review-nickname");
+            review_content=document.getElementsByClassName("review-content");
+            for(let i=0;i<5;i++){
+                    if(i<=response.length-1){
+                    review_nickname[i].innerHTML=response[i]['nickname']+"   ";
+                    review_content[i].innerHTML=response[i]['comment']+"   ";
+                    }
+                    else{
+                        review_nickname[i].innerHTML="";
+                        review_content[i].innerHTML="";
+                    }
+                }
+            }
+        function changemodal(response){
+            document.getElementById("modal-movie-name").innerHTML=response[0]['name'];
+            document.getElementById("modal-movie-crown").innerHTML=response[0]['rating'];
+            document.getElementById("modal-movie-date").innerHTML=response[0]['date'];
+            document.getElementsByClassName("modal-img")[0].style.backgroundImage="url('"+response[0]['poster_image']+"')";
+            document.getElementsByClassName("modal-background")[0].style.backgroundImage="url('"+response[0]['background_image']+"')";
+            document.getElementsByClassName("modal-trailer")[0].innerHTML=response[0]['video_title'];
+            document.getElementsByClassName("modal-trailer")[0].href=response[0]['video_link'];
+
+        }
+        window.addEventListener('click', (e) => {
+            if(e.target==modal){
+                modal.style.display = "none";
+                document.body.style.overflow = "auto"; 
+            }
+        })
+        function search(){//입력후 엔터 시 해당 영화,방송 찾기
+            const name = document.getElementById('nav-search').value.toUpperCase().replace(/ /g,"");
+            window.all = {{ all | tojson }};
+            if(name==""){
+                alert("검색어를 입력해주세요.");
+            }
+            else{
+                let notitle=false;
+                for(let i=0;i<{{all|length}};i++){
+                    const all1=all[i]['name'];
+                    const img_name=all1.toUpperCase().replace(/ /g,"");
+                    if(img_name==name){
+                        modal.style.display="block";
+                        document.body.style.overflow = "hidden";//스크롤 제거
+                        submitForm(all1);
+                        searchnone();
+                        notitle=true;
+                        break;
+                    }
+                    
+                }
+                
+                if(notitle==false){
+                    alert("해당 제목이 존재하지 않습니다.");
+                }
+                notitle=false;
+            }
+        }
+        var blockcheck=[];
+        function filter(){//키보드 입력 시 해당 문자가 들어가는 영화, 방송 필터링
+            const name = document.getElementById('nav-search').value.toUpperCase().replace(/ /g,"");
+            const searchbox=document.getElementsByClassName('nav-search-container');
+            const searchtitle=document.getElementsByClassName('nav-search-item');
+            if(name==""){
+                searchbox[0].style.display="none";
+                searchnone();
+            }
+            else{
+                searchbox[0].style.display="block";
+                for(let i=0;i<searchtitle.length;i++){
+                    const titlename=searchtitle[i].innerHTML.toUpperCase().replace(/ /g,"");
+                    if(titlename.indexOf(name)>-1){
+                        searchtitle[i].style.display="block";
+                        if(blockcheck.indexOf(i)==-1){
+                        blockcheck.push(i);}
+                    }
+                    else{
+                        searchtitle[i].style.display="none";
+                        if(blockcheck.indexOf(i)!=-1){
+                        blockcheck.splice(blockcheck.indexOf(i),1);}
+                    }
+                    
+                }
+            }
+        }
+        var downkey=-1;
+        function choosedown(){
+            const name = document.getElementById('nav-search').value;
+            const searchtitle=document.getElementsByClassName('nav-search-item');
+            if(downkey<blockcheck.length){
+                downkey+=1;
+                document.getElementById('nav-search').value=searchtitle[blockcheck[downkey]].innerHTML;
+                
+            }
+            else{
+                downkey=blockcheck.length-1;
+                document.getElementById('nav-search').value=searchtitle[blockcheck[downkey]].innerHTML;
+            }
+            
+        }
+        function chooseup(){
+            
+            const name = document.getElementById('nav-search').value;
+            const searchtitle=document.getElementsByClassName('nav-search-item');
+            if(downkey>0){
+                downkey-=1;    
+                document.getElementById('nav-search').value=searchtitle[blockcheck[downkey]].innerHTML;
+            }
+            else{
+                document.getElementById('nav-search').value=searchtitle[blockcheck[downkey]].innerHTML;
+            }
+            
+        }
+        function searchnone(){
+            document.getElementById('nav-search').value="";
+            downkey=-1;
+            const searchbox=document.getElementsByClassName('nav-search-container');
+            const searchtitle=document.getElementsByClassName('nav-search-item');
+            searchbox[0].style.display="none";
+            for(let i=0;i<searchtitle.length;i++){
+                searchtitle[i].style.none="none";
+            }
+            blockcheck=[];
+        }
+    </script>
+    
+</body>
+</html>
